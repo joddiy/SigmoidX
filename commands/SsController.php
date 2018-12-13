@@ -16,7 +16,7 @@ class SsController extends Controller
     {
         $pwd = $this->randomPassword();
         $output = shell_exec("sudo /home/ss-bash-master/ssadmin.sh add {$port} {$pwd} {$limit}");
-        echo "<pre>$output</pre>";
+        echo "add user {$port} {$pwd}";
     }
 
     function randomPassword()
