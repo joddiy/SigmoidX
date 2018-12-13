@@ -15,8 +15,14 @@ class SsController extends Controller
     public function actionCreateUser($port = 0, $limit = "1G")
     {
         $pwd = $this->randomPassword();
-        $output = shell_exec("sudo /home/ss-bash-master/ssadmin.sh add {$port} {$pwd} {$limit}");
-        echo "add user {$port} {$pwd}";
+        shell_exec("sudo /home/ss-bash-master/ssadmin.sh add {$port} {$pwd} {$limit}");
+        echo "add user {$port} {$pwd}\n";
+    }
+
+    public function actionDelUser($port = 0)
+    {
+        shell_exec("sudo /home/ss-bash-master/ssadmin.sh del {$port}");
+        echo "del user {$port}\n";
     }
 
     function randomPassword()
@@ -24,7 +30,7 @@ class SsController extends Controller
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $pass = array(); //remember to declare $pass as an array
         $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-        for ($i = 0; $i < 8; $i++) {
+        for ($i = 0; $i < 16; $i++) {
             $n = rand(0, $alphaLength);
             $pass[] = $alphabet[$n];
         }
